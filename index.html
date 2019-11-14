@@ -1,1 +1,62 @@
-
+<html>
+    <head>
+        <style> body{padding-right:40%;
+            font-family: sans-serif;
+            font-size: 20px;
+            background-color: antiquewhite;
+            }
+            pre {color: red;}
+            pre1{color:green;}
+        
+        </style>
+    </head>
+<body>
+    <h1>Graph Animations</h1>
+<p> Since our focus is animation, i will only focus on Dr. B's transitions. Note that the code being referred to in the paragraph is green in color. <br> In the reading, we learn that adding transitions to changing visualizations is extremely simple using D3. With just a few lines of simple code we can make it possible. For example, simply chaining ".transition()" to our D3 algorithm can make the most basic transition happen for a changing visualization.  </p>
+ <pre> svg.selectAll("rect")
+.data(dataset)
+<pre1>.transition()</pre1>
+.attr("y", function(d) {
+return h - yScale(d);
+})
+.attr("height", function(d) {
+return yScale(d);
+})
+.attr("fill", "red"); </pre>
+    <p> If we wanted to specify how long the transition period takes, we could simply add a ".duration()" line as shown below: </p>
+    <pre>
+    svg.selectAll("rect")
+.data(dataset)
+<pre1>.transition().duration(1000)</pre1>
+.attr("y", function(d) {
+return h - yScale(d);
+})
+.attr("height", function(d) {
+return yScale(d);
+})
+.attr("fill", "red");
+    </pre>
+<p> Note that the duration is in miniseconds (ms), so the value 1000 represents 1 second.<br> To determine "how" the transition happens(how will the animation behave in terms of it's speed of changing as opposed to duration), we can use an ease() line.</p>
+    <pre>
+    .transition()
+.duration(2000)
+<pre1>.ease(d3.easeLinear)</pre1>
+    </pre>
+    <p> To make something happen at the start or end of a transition we can simply use a .on() function as shown: </p>
+    <pre>
+    <pre1>.on("start", </pre1>function() {
+d3.select(this)
+.transition()
+.duration(250)
+.attr("fill", "brown")
+.attr("r", 3);
+})</pre>
+    <p>"start" would execute the function that comes after, at the beginning of the transition. "end" would execute it at the end.</p>
+    <h2> Dr. B's code: </h2>
+<p> Dr. B's transitions would likely have been something simple like this in his D3 chain:</p>    <pre> d3.select(this)
+.transition()
+.duration(250).ease(d3.easeLinear)
+ </pre>
+    <p> Although it looked amazing, this short chain of code should have done it, as explained above. </p>
+</body>    
+</html>
